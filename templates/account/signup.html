@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block script %}
+{% endblock %}
+
+{% load static %}
+
+{% block style %}
+<style>
+</style>
+{% endblock %}
+
+<!--html 코드 작성-->
+{% block content %}
+<form>
+<!--    {% csrf_token %}-->
+    <div class="form">
+        <!-- 아이디 입력 -->
+        <div class="userInput">
+            <h3 class="list">
+                ID
+            </h3>
+            <span id="idError"></span>
+            <input name="id" type="text" value="">
+        </div>
+
+        <!-- 비밀번호 입력 -->
+        <div class="userInput">
+            <h3 class="list">
+                Password
+            </h3>
+            <span id="pwError"></span>
+            <input name="pw" type="password" value="">
+        </div>
+
+        <!-- 이름 입력 -->
+        <div class="userInput">
+            <h3 class="list">
+                Name
+                <span id="nameError"></span>
+            </h3>
+            <input name="name" type="text" value="">
+        </div>
+
+        <!-- 생일 입력 -->
+        <div class="userInput">
+            <h3 class="list">
+                Date of Birth
+                <span id="birthError"></span>
+            </h3>
+            <div>
+                <input type="number" placeholder="Year()">
+                <select>
+                    <option value="">월</option>
+                    <option value="">1월</option>
+                    <option value="">2월</option>
+                    <option value="">3월</option>
+                    <option value="">4월</option>
+                    <option value="">5월</option>
+                    <option value="">6월</option>
+                    <option value="">7월</option>
+                    <option value="">8월</option>
+                    <option value="">9월</option>
+                    <option value="">10월</option>
+                    <option value="">11월</option>
+                    <option value="">12월</option>
+                </select>
+                <input type="number" placeholder="일">
+            </div>
+        </div>
+
+        <!-- 성별 입력 -->
+        <div class="userInput">
+            <h3 class="list">
+                Gender
+                <span id="genderError"></span>
+            </h3>
+            <input name="gender" type="radio" value="">
+            <label>Women</label>
+            <input name="gender" type="radio" value="">
+            <label>Men</label>
+        </div>
+
+        <!-- 이메일 입력 -->
+        <div class="userInput">
+            <h3 class="list">
+                E-mail
+                <span id="emailError"></span>
+            </h3>
+            <input name="email" type="text" value="">
+            <span>   @ </span>
+            <!-- 이메일 택일 -->
+            <select id="mail_Select">
+                <option>naver.com</option>
+                <option>gmail.com</option>
+                <option>daum.net</option>
+                <option>hanmail.net</option>
+                <option>hotmail.com</option>
+                <option>nate.com</option>
+                <option>freechal.com</option>
+                <option>lycos.co.kr</option>
+                <option>korea.com</option>
+                <option>hanmir.com</option>
+                <option>dreamwiz.com</option>
+                <option>paran.com</option>
+            </select>
+        </div>
+
+        <!-- 개인정보 수집 동의 -->
+        <div>User Privacy agreement</div>
+
+        <!-- 회원가입 버튼 -->
+        <div class="signup-button">Sign up</div>
+    </div>
+    <div>
+        {% if request.GET.result == 'passfail' %}
+        <p style="color: yellow;font-size:15px;">비밀번호가 일치하지 않습니다.</p>
+        {% endif %}
+        {% if request.GET.result == 'nfail' %}
+        <p style="color: yellow;font-size:15px;">이름을 입력하십시오.</p>
+        {% endif %}
+        {% if request.GET.result == 'idfail' %}
+        <p style="color: yellow;font-size:15px;">아이디를 입력하십시오.</p>
+        {% endif %}
+        {% if request.GET.result == 'phfail' %}
+        <p style="color: yellow;font-size:15px;">전화번호를 입력하십시오.</p>
+        {% endif %}
+        {% if request.GET.result == 'iddup' %}
+        <p style="color: yellow;font-size:15px;">이미 존재하는 아이디입니다.</p>
+        {% endif %}
+        {% if request.GET.result == 'phdup' %}
+        <p style="color: yellow;font-size:15px;">이미 존재하는 전화번호입니다.</p>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

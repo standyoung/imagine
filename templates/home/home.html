@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block script %}
+<!--js 관련 코드(자바스크립트) 작성-->
+{% endblock %}
+
+{% load static %}
+<!--static에 해당하는 코드 작성 (css파일 연결)-->
+
+{% block style %}
+<style>
+    .menu img{
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        width: 45px;
+        cursor : pointer
+    }
+    .img-box {
+        display: flex;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 160px;
+        position: relative;
+        width: 350px;
+        height: 320px;
+        background: rgb(254, 254, 254);
+        border: 3px solid rgb(94, 130, 35);
+        border-radius: 40px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+    }
+    .upload-box {
+        display: flex;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 520px;
+        position: absolute;
+        width: 630px;
+        height: 50px;
+        align-items: center;
+        background: rgb(254, 254, 254);
+        border: 3px solid rgb(94, 130, 35);
+        border-radius: 40px;
+        box-sizing: border-box;
+        z-index: 1;
+    }
+    .upload-title {
+        margin-right: auto;
+        width: 550px;
+        margin-left: 20px;
+        background: rgb(254, 254, 254);
+        color: rgb(0, 0, 0);
+        font-family: "Noto Serif KR";
+        font-size: 22px;
+        font-weight: 500;
+        text-align: left;
+    }
+    .upload-button {
+        margin-left: auto;
+        width: 20%;
+        margin-right: 20px;
+        background: rgb(254, 254, 254);
+        color: rgb(94, 130, 35);
+        font-family: "Noto Serif KR";
+        font-size: 22px;
+        font-weight: 700;
+        text-align: right;
+        cursor : pointer
+    }
+    .enter-button {
+        position: absolute;
+        top: 620px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgb(94, 130, 35);
+        font-family: "Noto Serif KR";
+        font-size: 22px;
+        font-weight: 700;
+        text-align: center;
+        cursor : pointer
+    }
+</style>
+{% endblock %}
+
+<!--html 코드 작성-->
+{% block content %}
+<div class="menu">
+    <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+</div>
+
+<div class="">
+
+</div>
+
+<div class="img-box">
+    <img class="img-upload" src="{% static 'image/christmas.png' %}" alt="menu" width="250">
+</div>
+
+<div class="upload-box">
+    <div class="upload-title">
+        IMG_3666.JPG
+    </div>
+    <div class="upload-button">
+        Upload
+    </div>
+</div>
+<div class="enter-button">
+    Enter
+</div>
+{% endblock %}

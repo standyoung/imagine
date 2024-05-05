@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block script %}
+{% endblock %}
+
+{% load static %}
+
+{% block style %}
+<style>
+</style>
+{% endblock %}
+
+<!--html 코드 작성-->
+{% block content %}
+
+<ul>
+    <li><a href="{% url 'account:login' %}">Login</a></li>
+    <li><a href="{% url 'account:signup' %}">Sign up</a></li>
+</ul>
+
+{% endblock %}
+
+
