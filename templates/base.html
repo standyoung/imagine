@@ -36,7 +36,13 @@
             text-align: center;
             cursor : pointer
         }
-
+        .menu img{
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 45px;
+            cursor : pointer
+        }
     </style>
 
 {% block script %}
@@ -47,8 +53,16 @@
 
 </head>
 <body>
+<div class="menu">
+    <a href="{% url 'mypage:like' %}">
+        <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+    </a>
+</div>
+
 <div>
-    <h1 class="title">Imagine</h1>
+    <a href="{% url 'home:home' %}">
+        <h1 class="title">Imagine</h1>
+    </a>
 </div>
 
 
