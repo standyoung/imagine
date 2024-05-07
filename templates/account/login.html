@@ -12,7 +12,22 @@
 
 <!--html 코드 작성-->
 {% block content %}
-
+<div>
+    <form>
+        {% csrf_token %}
+        <div>
+            <label for="username">ID</label>
+            <input type="text" class="form-contrl" name="username" id="username"
+            value="{{ form.username.value|default_if_none:'' }}">
+        </div>
+        <div>
+            <label for="password">PWD</label>
+            <input type="password" class="form-contrl" name="password" id="password"
+            value="{{ form.password.value|default_if_none:'' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">로그인</button>
+    </form>
+</div>
 <ul>
     <li><a href="{% url 'account:login' %}">Login</a></li>
     <li><a href="{% url 'account:signup' %}">Sign up</a></li>

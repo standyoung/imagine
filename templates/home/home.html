@@ -9,13 +9,6 @@
 
 {% block style %}
 <style>
-    .menu img{
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        width: 45px;
-        cursor : pointer
-    }
     .img-box {
         display: flex;
         left: 50%;
@@ -86,9 +79,6 @@
 
 <!--html 코드 작성-->
 {% block content %}
-<div class="menu">
-    <img src="{% static 'image/menu-icon.png' %}" alt="menu">
-</div>
 
 <div class="">
 
@@ -102,9 +92,11 @@
     <div class="upload-title">
         IMG_3666.JPG
     </div>
+    {% if user.is_authenticated %}
     <div class="upload-button">
         Upload
     </div>
+    {% endif %}
 </div>
 <div class="enter-button">
     Enter
