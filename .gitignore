@@ -1,6 +1,6 @@
 *.pyc
 *~
-.env
+secrets.json
 .idea
 .DS_Store
 __pycache__

@@ -31,7 +31,11 @@ def get_secret(setting, secrets=secrets):
         error_msg = "Set the {} environment variable".format(setting)
         raise ImproperlyConfigured(error_msg)
 
+<<<<<<< HEAD
 SECRET_KEY = "8eyiwg5&5a*3h7a^0o555@2cnjb-aiv1-bh7*y!&x)6&27yygn"
+=======
+SECRET_KEY = get_secret("SECRET_KEY")
+>>>>>>> 985fcb02b241ef4bfbf22747953facfdc2842085
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
