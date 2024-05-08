@@ -1,18 +1,71 @@
+
 <!DOCTYPE html>
+{% block content %}
+{% block title %}Imagine : 감성노래 추천 웹서비스{% endblock %}
+{% endblock %}
 {% load static %}
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
     <title>Imagine : 감성노래 추천 웹서비스</title>
+    <meta charset="UTF-8">
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap');
+        .noto-serif-kr-regular {
+          font-family: "Noto Serif KR", serif;
+          font-weight: 400;
+          font-style: normal;
+        }
+
         * {
             background-color:#FDF4C9;
         }
+        .title{
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            position: absolute;
+            width: 300px;
+            height: 100px;
+            color: rgb(94, 130, 35);
+            font-family: "Noto Serif KR";
+            font-size: 55px;
+            font-weight: 700;
+            line-height: 100px;
+            letter-spacing: 0px;
+            text-align: center;
+            cursor : pointer
+        }
+        .menu img{
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 45px;
+            cursor : pointer
+        }
     </style>
-</head>
 
-{% block content %}
-<body>
-</body>
+{% block script %}
 {% endblock %}
+
+{% block style %}
+{% endblock %}
+
+</head>
+<body>
+<div class="menu">
+    <a href="{% url 'mypage:like' %}">
+        <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+    </a>
+</div>
+
+<div>
+    <a href="{% url 'home:home' %}">
+        <h1 class="title">Imagine</h1>
+    </a>
+</div>
+
+
+</body>
+
 </html>
