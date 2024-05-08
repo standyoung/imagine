@@ -7,31 +7,40 @@
 
 {% block style %}
 <style>
+    .id-box {
+        display: flex;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 160px;
+        position: relative;
+        width: 486px;
+        height: 50px;
+        background: rgb(254, 254, 254);
+        border: 3px solid rgb(94, 130, 35);
+        border-radius: 40px;
+        box-sizing: border-box;
+        justify-content: center;
+        align-items: center;
+    }
 </style>
 {% endblock %}
 
 <!--html 코드 작성-->
 {% block content %}
 <div>
-    <form>
+    <form action="" method="post">
         {% csrf_token %}
         <div>
             <label for="username">ID</label>
-            <input type="text" class="form-contrl" name="username" id="username"
-            value="{{ form.username.value|default_if_none:'' }}">
+            <input type="text" class="form-contrl" name="username" id="username">
         </div>
         <div>
             <label for="password">PWD</label>
-            <input type="password" class="form-contrl" name="password" id="password"
-            value="{{ form.password.value|default_if_none:'' }}">
+            <input type="password" class="form-contrl" name="password" id="password">
         </div>
         <button type="submit" class="btn btn-primary">로그인</button>
     </form>
 </div>
-<ul>
-    <li><a href="{% url 'account:login' %}">Login</a></li>
-    <li><a href="{% url 'account:signup' %}">Sign up</a></li>
-</ul>
 
 {% endblock %}
 
