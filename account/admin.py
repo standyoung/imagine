@@ -3,7 +3,7 @@ from account.models import User
 
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('uid', 'pwd', 'username', 'birth', 'gender', 'email')
+    list_display = ('username', 'password', 'nickname', 'birth', 'gender', 'email')
 
     search_fields = ['username']
 

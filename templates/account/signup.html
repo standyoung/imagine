@@ -21,7 +21,7 @@
                 ID
             </h3>
             <span id="idError"></span>
-            <input name="uid" type="text" value="">
+            <input name="username" type="text" value="">
         </div>
 
         <!-- 비밀번호 입력 -->
@@ -30,7 +30,7 @@
                 Password
             </h3>
             <span id="pwError"></span>
-            <input name="pwd" type="password" value="">
+            <input name="password" type="password" value="">
         </div>
 
         <!-- 이름 입력 -->
@@ -39,7 +39,7 @@
                 Name
                 <span id="nameError"></span>
             </h3>
-            <input name="name" type="text" value="">
+            <input name="nickname" type="text" value="">
         </div>
 
         <!-- 생일 입력 -->
@@ -59,10 +59,15 @@
                 Gender
                 <span id="genderError"></span>
             </h3>
-            <input name="gender" type="radio" value="">
-            <label>Women</label>
-            <input name="gender" type="radio" value="">
-            <label>Men</label>
+            <label>
+                <!--여성 or 남성으로 value 값이 POST됨-->
+                <input name="gender" type="radio" value="여성">
+                Women
+            </label>
+            <label>
+                <input name="gender" type="radio" value="남성">
+                Men
+            </label>
         </div>
 
         <!-- 이메일 입력 -->
@@ -74,7 +79,7 @@
             <input name="email" type="text" value="">
             <span>   @ </span>
             <!-- 이메일 택일 -->
-            <select id="mail_Select">
+            <select name="email-detail" id="mail_Select">
                 <option>naver.com</option>
                 <option>gmail.com</option>
                 <option>daum.net</option>

@@ -13,17 +13,18 @@
 <!--html 코드 작성-->
 {% block content %}
 <div>
-    <form action="" method="post">
+    <form action="{% url 'account:login' %}" method="post">
         {% csrf_token %}
         <div>
             <label for="username">ID</label>
-            <input type="text" class="form-contrl" name="username" id="username">
+            <input type="text" class="form-control" name="username" id="username">
         </div>
         <div>
-            <label for="password">PWD</label>
-            <input type="password" class="form-contrl" name="password" id="password">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" id="password">
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
+        <div class="signup-button"><input type="submit" value="Login"></div>
+        {{error}}
     </form>
 </div>
 

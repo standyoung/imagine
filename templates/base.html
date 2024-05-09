@@ -53,7 +53,7 @@
 
 </head>
 <body>
-{% if user.is_authenticated %}
+{% if request.session.authUser is None %}
 <div class="menu">
     <a href="{% url 'mypage:like' %}">
         <img src="{% static 'image/menu-icon.png' %}" alt="menu">
@@ -67,8 +67,11 @@
 </div>
 
 <ul>
+    {% if request.session.authUser %}
+    
+    {% else %}
+        <li><a href="{% url 'account:logout' %}">Logout</a></li>
     <li><a href="{% url 'account:login' %}">Login</a></li>
-    {% if user.is_authenticated %}
     <li><a href="{% url 'account:signup' %}">Sign up</a></li>
     {% endif %}
 </ul>
