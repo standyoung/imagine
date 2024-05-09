@@ -1,47 +1,98 @@
 {% extends 'base.html' %}
 
 {% block script %}
+
 {% endblock %}
 
 {% load static %}
 
 {% block style %}
+
 <style>
-    .id-box {
+    .container {
+        width: 100%;
         display: flex;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 160px;
-        position: relative;
-        width: 486px;
-        height: 50px;
-        background: rgb(254, 254, 254);
-        border: 3px solid rgb(94, 130, 35);
-        border-radius: 40px;
-        box-sizing: border-box;
-        justify-content: center;
+        flex-direction: column;
         align-items: center;
+        margin-top: 150px;
+    }
+    .login-input-section-wrap {
+        padding-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .login-input-wrap {
+        width: 465px;
+        height: 48px;
+        border: 3px solid rgb(94, 130, 35);
+        background: white;
+        border-radius: 40px;
+        margin-bottom: 15px;
+    }
+    .login-input-wrap input {
+        border: none;
+        width: 430px;
+        margin-top: 10px;
+        font-size: 14px;
+        margin-left: 10px;
+        height: 30px;
+    }
+    .social-login-wrap {
+        display: flex;
+        justify-content: space-around;
+        padding: 0 20px;
+        margin: 20px 0;
+    }
+    .social-button {
+        background-color: #FDF4C9;
+        border: 2px solid #5E8223;
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #5E8223;
+        cursor: pointer;
+        margin: 0 10px;
+    }
+    .login-button-wrap {
+        padding-top: 20px;
+    }
+    .login-button-wrap button {
+        width: 100px;
+        height: 40px;
+        font-size: 16px;
+        background: rgb(253, 244, 201);
+        color: rgb(94, 130, 35);
+        border: none;
+        cursor: pointer;
     }
 </style>
 {% endblock %}
 
-<!--html 코드 작성-->
 {% block content %}
-<div>
+<div class="container">
     <form action="" method="post">
         {% csrf_token %}
-        <div>
-            <label for="username">ID</label>
-            <input type="text" class="form-contrl" name="username" id="username">
+        <div class="main-wrap">
+        <!-- 로그인 섹션 -->
+            <section class="login-input-section-wrap">
+                <div class="login-input-wrap">
+                    <input placeholder="ID" type="text" name="username">
+                </div>
+                <div class="login-input-wrap password-wrap">
+                    <input placeholder="Password" type="password" name="password">
+                </div>
+            <!-- 소셜 로그인 버튼 -->
+                <div class="social-login-wrap">
+                    <button class="social-button naver">N</button>
+                    <button class="social-button kakao">TALK</button>
+                    <button class="social-button google">G</button>
+                </div>
+                <div class="login-button-wrap">
+                    <button type="submit">Login</button>
+                </div>
+            </section>
         </div>
-        <div>
-            <label for="password">PWD</label>
-            <input type="password" class="form-contrl" name="password" id="password">
-        </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
     </form>
 </div>
-
 {% endblock %}
-
-
