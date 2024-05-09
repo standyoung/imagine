@@ -4,7 +4,7 @@ from django.views       import View
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts   import render, redirect
 from django.contrib.auth import login as auth_login
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate as auth_authenticate
 from django.contrib.auth import logout as auth_logout
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password, check_password
@@ -18,27 +18,11 @@ def logout(request):
     return redirect('/')
 
 def login(request):
-    # if request.method == 'GET':
-    #     return render(request, 'account/login.html')
-    #
-    # # POST 방식 요청 -> 사용자가 보내는 데이터와 데이터베이스의 정보 일치여부 확인
-    # elif request.method == 'POST':
-    #     uid = request.POST['uid']
-    #     pwd = request.POST['uid']
-    #
-    #     # 로그인 처리를 해줌
-    #     vuser = auth_authenticate(request, username=uid, password=pwd)
-    #     if vuser is not None:
-    #         auth_login(request, vuser)
-    #         return redirect('home')
-    #     else:
-    #         return render(request, 'account/login.html')
-
     response_data = {}
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password') # 아이디 비밀번호 입력받은 것 확인
-        userObject = authenticate(request=request,username=username,password=password)
+        userObject = auth_authenticate(request=request,username=username,password=password)
 
         if userObject is not None:
             print(userObject)

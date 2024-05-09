@@ -100,6 +100,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+AUTH_USER_MODEL = 'account.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
