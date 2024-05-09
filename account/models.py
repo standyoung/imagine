@@ -29,7 +29,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-
+# AbstarctUser을 상속한 모델을 만드는 방법
 class User(AbstractUser):
     username = models.CharField("아이디", max_length=40, default='', unique=True) # unique default false
     password = models.CharField("비밀번호", max_length=300, null=False) # 암호화 대비 넉넉하게
@@ -39,6 +39,7 @@ class User(AbstractUser):
     email = models.EmailField("이메일",max_length=300, null=False)
     first_name = None
     last_name = None
+    date_joined = None
 
     # REQUIRED_FIELDS 변수에 추가된 필드를 넣어줘야 추후에 supseruser 생성 시에 해당 데이터도 입력 받음
     # password는 이미 REQUIRED_FIELDS 변수
