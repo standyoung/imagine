@@ -34,14 +34,15 @@
             line-height: 100px;
             letter-spacing: 0px;
             text-align: center;
-            cursor : pointer
+            cursor : pointer;
         }
         .menu img{
             position: absolute;
             top: 30px;
             left: 30px;
             width: 45px;
-            cursor : pointer
+            cursor : pointer;
+            background: none;
         }
     </style>
 
@@ -67,13 +68,9 @@
 </div>
 
 <ul>
-    {% if request.session.authUser %}
-    
-    {% else %}
-        <li><a href="{% url 'account:logout' %}">Logout</a></li>
     <li><a href="{% url 'account:login' %}">Login</a></li>
     <li><a href="{% url 'account:signup' %}">Sign up</a></li>
-    {% endif %}
+    <li><a href="{% url 'account:logout' %}">Logout</a></li>
 </ul>
 
 

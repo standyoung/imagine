@@ -1,15 +1,18 @@
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate
+from account.models import User
+from django import forms
 
-class CustomUserChangeForm(UserChangeForm):
+
+class AccountAuthForm(forms.ModelForm):
+    password = forms.CharField(label='password', widget=forms.PasswordInput)
 
     class Meta:
-        model = get_user_model()
-        fields = ('username', 'nickname', 'birth', 'gender', 'email')
+        model = User()
+        fields = ('username', 'password')
 
-
-class CustomUserCreationForm(UserCreationForm):
-
-    class Meta(UserCreationForm.Meta):
-        model = get_user_model()
-        fields = UserCreationForm.Meta.fields + ('username',)
+    def clean(self):
+        if self.is_valid():
+            username = self.cleaned_data.get('username')
+            password = self.cleaned_data.get('password')
+            if not authenticate(username=username, password=password):
+                raise forms.ValidationError("Invalid login")
