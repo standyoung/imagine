@@ -12,7 +12,8 @@ from .models import User
 
 # Create your views here.
 def logout(request):
-    auth.auth_logout(request)
+    if request.method == 'POST':
+        auth.auth_logout(request)
     return redirect('/')
 
 def login(request):
