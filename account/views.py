@@ -1,6 +1,8 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts   import render, redirect
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import login as auth_login
+
 from django.forms import model_to_dict
 from django.contrib import auth
 
@@ -22,9 +24,12 @@ def login(request):
 
     elif request.method == 'POST':
         errMsg = {}
-        username = request.POST.get('username', None)
-        password = request.POST.get('password', None)
+        username = request.POST['username']
+        password = request.POST['password']
+        # user = auth.authenticate(username=username, password=password)
         user = User.objects.get(username=username)
+        # if user is not None:
+        #     auth_login(request, user)
 
         # 로그인 성공
         if user.password == password:
