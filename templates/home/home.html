@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block script %}
-<!--js 관련 코드(자바스크립트) 작성-->
+
 {% endblock %}
 
 {% load static %}
-<!--static에 해당하는 코드 작성 (css파일 연결)-->
 
 {% block style %}
+
 <style>
     .img-box {
         display: flex;
@@ -76,10 +76,7 @@
     }
 </style>
 {% endblock %}
-
-<!--html 코드 작성-->
 {% block content %}
-
 <div class="">
 
 </div>
@@ -92,13 +89,12 @@
     <div class="upload-title">
         IMG_3666.JPG
     </div>
-    {% if user.is_authenticated %}
     <div class="upload-button">
         Upload
     </div>
-    {% endif %}
 </div>
 <div class="enter-button">
     Enter
 </div>
 {% endblock %}
+
