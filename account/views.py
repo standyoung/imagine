@@ -1,11 +1,14 @@
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts   import render, redirect
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth import authenticate
+
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.hashers import make_password
+
 
 from django.forms import model_to_dict
 from django.contrib import auth
-
 
 from .forms import AccountAuthForm
 # create한 login 함수랑 겹치면 안됨
@@ -15,7 +18,8 @@ from .models import User
 # Create your views here.
 def logout(request):
     if request.method == 'POST':
-        auth.auth_logout(request)
+        auth_logout(request)
+        print("Logged out successfully")
     return redirect('/')
 
 def login(request):
@@ -24,20 +28,22 @@ def login(request):
 
     elif request.method == 'POST':
         errMsg = {}
-        username = request.POST['username']
-        password = request.POST['password']
-        # user = auth.authenticate(username=username, password=password)
-        user = User.objects.get(username=username)
-        # if user is not None:
-        #     auth_login(request, user)
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        print(f"username : {username}, password : {password}")
+        user = authenticate(request, username=username, password=password)
 
         # 로그인 성공
-        if user.password == password:
-            request.session['me'] = user.username
+        if user is not None:
+            auth_login(request, user)
+            print("logged in successfully")
             return redirect('home:home')
+
         # 로그인 실패
         else :
-            return render(request, 'home/home.html', errMsg)
+            errMsg = {}
+            print("login failed")
+            return render(request, 'account/login.html', errMsg)
 
 # 회원가입
 def signup(request):
@@ -48,8 +54,7 @@ def signup(request):
         # 입력 데이터 user 객체에 저장
         user = User(
             username=request.POST['username'],
-            password=request.POST['password'],
-            # pwd=make_password(request.POST['pwd']),
+            password=make_password(request.POST['password']),
             nickname=request.POST['nickname'],
             birth=request.POST['birth'],
             gender=request.POST['gender'],

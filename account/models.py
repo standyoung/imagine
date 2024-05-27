@@ -25,8 +25,7 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.is_staff = True
         user.is_active = True
-        user.save()
-
+        user.save(using=self._db)
         return user
 
 # AbstarctUser을 상속한 모델을 만드는 방법
@@ -40,6 +39,8 @@ class User(AbstractUser):
     first_name = None
     last_name = None
     date_joined = None
+
+    USERNAME_FIELD = 'username'  # for using for login
 
     # REQUIRED_FIELDS 변수에 추가된 필드를 넣어줘야 추후에 supseruser 생성 시에 해당 데이터도 입력 받음
     # password는 이미 REQUIRED_FIELDS 변수
