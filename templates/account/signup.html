@@ -193,7 +193,7 @@
 
 {% block content %}
 <div class="signup-container">
-    <form action="{% url 'account:signup' %}" method="POST">
+    <form action="{% url 'accounts:signup' %}" method="POST">
         {% csrf_token %}
         <div class="form">
         <!-- 아이디 입력 -->

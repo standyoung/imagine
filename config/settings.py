@@ -42,7 +42,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'home',
-    'account',
+    'accounts',
     'mypage',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -50,8 +50,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'rest_framework.authtoken',
+
+    # Social 로그인을 위한 app
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    # 외부 소셜 서비스
+    'allauth.socialaccount.providers.naver',
+    'allauth.socialaccount.providers.kakao',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -99,8 +108,38 @@ DATABASES = {
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
-AUTH_USER_MODEL = 'account.User'
+AUTHENTICATION_BACKENDS = [
+    # 'alluth'와 상관없이 Django admin에서 사용자 이름으로 로그인 해야함`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` 이메일 로그인 하는 특정 인증 방법
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1 # 사이트 아이디 기본값
+
+ACCOUNT_EMAIL_REQUIRED = True # 계정 이메일이 필요한가?
+ACCOUNT_EMAIL_VERIFICATION = 'none' # 이메일 검증 과정이 필요한가?
+
+# # 소셜 로그인 설정
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': [
+#             'email',
+#         ],
+#         'AUTH_PARAMS': {
+#             'access_type': 'online',
+#         }
+#     },
+#     'kakao': {
+#         'SCOPE': ['profile', 'account_email'],
+#     },
+#     'naver': {
+#         'SCOPE': ['profile'],
+#     },
+# }
+
+AUTH_USER_MODEL = 'accounts.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -143,6 +182,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# media/images/ 안에 image들이 저장됨
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -150,3 +193,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 로그인 성공 후 이동하는 URL
 LOGIN_REDIRECT_URL = '/'
+
+# 최대 파일 크기 (10MB)
+MAX_UPLOAD_SIZE = 10 * 1024 * 1024
+
+# 허용되는 파일 형식
+ALLOWED_FILE_TYPES = [
+    'image/jpeg',
+    'image/png',
+    'image/gif',
+]
+

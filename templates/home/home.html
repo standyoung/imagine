@@ -9,6 +9,11 @@
 {% block style %}
 
 <style>
+    /* 숨겨진 파일 입력 필드 */
+    #file-input {
+        display: none;
+    }
+
     .img-box {
         display: flex;
         left: 50%;
@@ -26,11 +31,13 @@
     }
     .upload-box {
         display: flex;
+        margin: 0 auto;
         left: 50%;
         transform: translateX(-50%);
         top: 575px;
         position: absolute;
-        width: 630px;
+        width: 100%;
+        max-width: 600px;
         height: 50px;
         align-items: center;
         background: rgb(254, 254, 254);
@@ -40,27 +47,29 @@
         z-index: 1;
     }
     .upload-title {
-        margin-right: auto;
-        width: 550px;
-        margin-left: 20px;
-        background: rgb(254, 254, 254);
-        color: rgb(0, 0, 0);
+        flex-grow: 1;
         font-family: "Noto Serif KR";
-        font-size: 22px;
-        font-weight: 500;
-        text-align: left;
+        font-size: 20px;
+        color: #333;
+        margin-left: 20px;
     }
     .upload-button {
+        background: none;
+        display: flex;
+        align-items: center;
+    }
+    .upload-button button {
         margin-left: auto;
-        width: 20%;
+        width: auto;
         margin-right: 20px;
-        background: rgb(254, 254, 254);
-        color: rgb(94, 130, 35);
+        padding: 0;
         font-family: "Noto Serif KR";
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 700;
-        text-align: right;
-        cursor : pointer
+        color: rgb(94, 130, 35);
+        border : none;
+        background: none;
+        cursor: pointer;
     }
     .enter-button {
         position: absolute;
@@ -77,24 +86,39 @@
 </style>
 {% endblock %}
 {% block content %}
-<div class="">
+    <!--이미지 업로드 박스-->
+    <div class="img-box">
+    </div>
 
-</div>
-
-<div class="img-box">
-    <img class="img-upload" src="{% static 'image/christmas.png' %}" alt="menu" width="250">
-</div>
-
-<div class="upload-box">
+    <!--이미지 파일명 박스-->
+    <div class="upload-box">
+    {% if request.user.is_authenticated %}
     <div class="upload-title">
-        IMG_3666.JPG
     </div>
-    <div class="upload-button">
-        Upload
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="upload-button">
+                <button type="submit">Upload</button>
+                <input type="file" id="file-input">
+            </div>
+        </form>
+    {% endif %}
     </div>
-</div>
-<div class="enter-button">
-    Enter
-</div>
+
+    <script>
+        // JavaScript를 사용하여 파일 입력 필드를 감추고 버튼 클릭 시 파일 선택 창을 열도록 설정
+        document.querySelector('.upload-button').addEventListener('click', function() {
+            document.getElementById('file-input').click();
+        });
+    </script>
+
+    <!--엔터 버튼-->
+    {% if request.user.is_authenticated %}
+    <div class="enter-button">
+         Enter
+    </div>
+    {% endif %}
+    
 {% endblock %}
 
