@@ -1,25 +1,5 @@
 {% extends 'base.html' %}
 
-{% block script %}
-<script>
-    function openPrivacyPopup() {
-        document.getElementById('privacy-popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
-    }
-
-    function closePrivacyPopup() {
-        document.getElementById('privacy-popup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
-    }
-
-    function agreeAndClosePopup() {
-        if (document.getElementById('agree-checkbox').checked) { // 체크박스가 체크되었는지 확인
-            closePrivacyPopup(); // 체크되면 팝업 닫기
-        }
-    }
-</script>
-{% endblock %}
-
 {% load static %}
 
 {% block style %}
@@ -192,9 +172,76 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+    function openPrivacyPopup() {
+        document.getElementById('privacy-popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
+    }
+
+    function closePrivacyPopup() {
+        document.getElementById('privacy-popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
+    }
+
+    function agreeAndClosePopup() {
+        if (document.getElementById('agree-checkbox').checked) { // 체크박스가 체크되었는지 확인
+            closePrivacyPopup(); // 체크되면 팝업 닫기
+        }
+    }
+
+    function showWarningPopup(message) {
+        document.getElementById('warning-popup-message').innerText = message; // 메시지 설정
+        document.getElementById('warning-popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
+    }
+
+    function closeWarningPopup() {
+        document.getElementById('warning-popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
+    }
+
+    function showPrivacyWarningPopup() {
+        document.getElementById('privacy-warning-popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
+    }
+
+    function closePrivacyWarningPopup() {
+        document.getElementById('privacy-warning-popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
+    }
+
+    // 폼 검증 및 제출
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelector('.signup-button input').addEventListener('click', function (event) {
+            // 폼 필드 값 가져오기
+            var username = document.querySelector('input[name="username"]').value;
+            var password = document.querySelector('input[name="password"]').value;
+            var nickname = document.querySelector('input[name="nickname"]').value;
+            var birth = document.querySelector('input[name="birth"]').value;
+            var gender = document.querySelector('input[name="gender"]:checked');
+            var email = document.querySelector('input[name="email"]').value;
+            var emailDetail = document.querySelector('select[name="email-detail"]').value;
+
+            // 모든 필드가 채워졌는지 확인
+            if (!username || !password || !nickname || !birth || !gender || !email || !emailDetail) {
+                event.preventDefault(); // 폼 제출 방지
+                showWarningPopup("Please enter all information."); // 경고 팝업창 표시
+                return; // 함수 종료
+            }
+
+            // 개인정보 동의 체크박스가 체크되지 않았을 경우
+            if (!document.getElementById('agree-checkbox').checked) {
+                event.preventDefault(); // 폼 제출 방지
+                showPrivacyWarningPopup(); // 개인정보 동의 경고 팝업창 표시
+            }
+        });
+    });
+    </script>
+    
 <div class="signup-container">
     <form action="{% url 'accounts:signup' %}" method="POST">
         {% csrf_token %}
+        {{ form.as_p }}
         <div class="form">
         <!-- 아이디 입력 -->
             <div class="userInput">
@@ -328,6 +375,27 @@
         <input type="checkbox" id="agree-checkbox" onclick="agreeAndClosePopup()"> Agree
     </div>
 </div>
+    </div>
+</div>
+<!-- 개인정보 동의 미완료 경고 팝업창 추가 -->
+<div id="privacy-warning-popup" class="popup">
+    <div class="popup-header">
+        <span>Warning</span> <!-- 경고 팝업창 제목 -->
+        <span class="popup-close" onclick="closePrivacyWarningPopup()">&#x2715;</span> <!-- 팝업 닫기 버튼 -->
+    </div>
+    <div class="popup-content">
+        <p>Please agree to the privacy policy before signing up.</p> <!-- 경고 메시지 내용 -->
+    </div>
+</div>
+
+<!-- 모든 정보 미완료 경고 팝업창 추가 -->
+<div id="warning-popup" class="popup">
+    <div class="popup-header">
+        <span>Warning</span> <!-- 경고 팝업창 제목 -->
+        <span class="popup-close" onclick="closeWarningPopup()">&#x2715;</span> <!-- 팝업 닫기 버튼 -->
+    </div>
+    <div class="popup-content">
+        <p id="warning-popup-message">Please enter all information.</p> <!-- 경고 메시지 내용 -->
     </div>
 </div>
 <!-- 팝업 오버레이 추가 -->

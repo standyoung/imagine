@@ -1,3 +1,5 @@
+import uuid
+
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
@@ -30,6 +32,7 @@ class UserManager(BaseUserManager):
 
 # AbstarctUser을 상속한 모델을 만드는 방법
 class User(AbstractUser):
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField("아이디", max_length=40, default='', unique=True) # unique default false
     password = models.CharField("비밀번호", max_length=300, null=False) # 암호화 대비 넉넉하게
     nickname = models.CharField("이름", max_length=40, null=False)

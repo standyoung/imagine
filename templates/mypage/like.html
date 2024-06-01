@@ -1,31 +1,5 @@
 {% extends 'base.html' %}
 
-{% block script %}
-<script>
-    let currentIndex = null; // 현재 삭제할 인덱스를 저장하기 위한 변수
-
-    function showDeletePopup(index) {
-        currentIndex = index; // 삭제할 인덱스를 저장
-        document.getElementById('delete-popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
-    }
-
-    function hideDeletePopup() {
-        document.getElementById('delete-popup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
-    }
-
-    function confirmDelete() {
-        if (currentIndex !== null) {
-            document.getElementById(`text-${currentIndex}`).innerHTML = ''; // 텍스트 박스 내용을 지움
-            document.getElementById(`image-${currentIndex}`).src = ''; // 이미지 삭제
-            document.getElementById(`image-container-${currentIndex}`).classList.remove('has-image'); // 이미지 컨테이너 클래스 업데이트
-            hideDeletePopup();
-        }
-    }
-</script>
-{% endblock %}
-
 {% load static %}
 
 {% block style %}
@@ -117,7 +91,7 @@
         background-color: white;
     }
     .delete-button { /* delete 버튼 스타일 */
-        background-color: none;
+        background: none;
         width: 55px;
         height: 40px;
         display: flex;
@@ -171,7 +145,7 @@
         margin-top: 20px;
     }
     .popup-button { /* 팝업 버튼 스타일 */
-        background-color: none;
+        background: none;
         width: 50px;
         height: 30px;
         display: flex;
@@ -198,6 +172,31 @@
 {% endblock %}
 
 {% block content %}
+    <script>
+    let currentIndex = null; // 현재 삭제할 인덱스를 저장하기 위한 변수
+
+    function showDeletePopup(index) {
+        currentIndex = index; // 삭제할 인덱스를 저장
+        document.getElementById('delete-popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
+    }
+
+    function hideDeletePopup() {
+        document.getElementById('delete-popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
+    }
+
+    function confirmDelete() {
+        if (currentIndex !== null) {
+            document.getElementById(`text-${currentIndex}`).innerHTML = ''; // 텍스트 박스 내용을 지움
+            document.getElementById(`image-${currentIndex}`).src = ''; // 이미지 삭제
+            document.getElementById(`image-container-${currentIndex}`).classList.remove('has-images'); // 이미지 컨테이너 클래스 업데이트
+            hideDeletePopup();
+        }
+    }
+    </script>
+
+
 <div class="mylist">
     My list
 </div>

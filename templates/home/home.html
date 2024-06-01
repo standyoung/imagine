@@ -9,11 +9,6 @@
 {% block style %}
 
 <style>
-    /* 숨겨진 파일 입력 필드 */
-    #file-input {
-        display: none;
-    }
-
     .img-box {
         display: flex;
         left: 50%;
@@ -76,18 +71,25 @@
         top: 670px;
         left: 50%;
         transform: translateX(-50%);
+        text-align: center;
+        cursor : pointer
+    }
+    .enter-button a {
         color: rgb(94, 130, 35);
         font-family: "Noto Serif KR";
         font-size: 22px;
         font-weight: 700;
-        text-align: center;
-        cursor : pointer
+        text-decoration: none;
     }
 </style>
 {% endblock %}
 {% block content %}
     <!--이미지 업로드 박스-->
     <div class="img-box">
+    {% for image in images %}
+        <img src="{{ image.image.url }}">
+    {% endfor %}
+
     </div>
 
     <!--이미지 파일명 박스-->
@@ -95,12 +97,13 @@
     {% if request.user.is_authenticated %}
     <div class="upload-title">
     </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'home:upload' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="upload-button">
-                <button type="submit">Upload</button>
-                <input type="file" id="file-input">
+                <button id="btn-imageupload" type="submit">Upload</button>
+                <!--숨겨진 파일 입력 필드-->
+                <input type="file" id="input-imageupload" onchange="" style="display: none;">
             </div>
         </form>
     {% endif %}
@@ -111,12 +114,16 @@
         document.querySelector('.upload-button').addEventListener('click', function() {
             document.getElementById('file-input').click();
         });
+
+        $('#btn-imageupload').click(function (){
+            $('#input-imageupload').click();
+        });
     </script>
 
     <!--엔터 버튼-->
     {% if request.user.is_authenticated %}
     <div class="enter-button">
-         Enter
+        <a href="{% url 'home:result' %}">Enter</a>
     </div>
     {% endif %}
     

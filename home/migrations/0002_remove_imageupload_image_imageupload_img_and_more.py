@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.RemoveField(
             model_name='imageupload',
-            name='image',
+            name='images',
         ),
         migrations.AddField(
             model_name='imageupload',

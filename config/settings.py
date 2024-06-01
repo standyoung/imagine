@@ -199,8 +199,8 @@ MAX_UPLOAD_SIZE = 10 * 1024 * 1024
 
 # 허용되는 파일 형식
 ALLOWED_FILE_TYPES = [
-    'image/jpeg',
-    'image/png',
-    'image/gif',
+    'images/jpeg',
+    'images/png',
+    'images/gif',
 ]
 

@@ -76,40 +76,33 @@
         top: 670px;
         left: 50%;
         transform: translateX(-50%);
+        text-align: center;
+        cursor : pointer
+    }
+    .enter-button a {
         color: rgb(94, 130, 35);
         font-family: "Noto Serif KR";
         font-size: 22px;
         font-weight: 700;
-        text-align: center;
-        cursor : pointer
+        text-decoration: none;
     }
 </style>
 {% endblock %}
 {% block content %}
-<div class="">
-
-</div>
-
-<div class="img-box">
     <!--이미지 업로드 박스-->
-    {% if request.user.is_authenticated %}
-
-
+    <div class="img-box">
     {% for image in images %}
-        <img class="img-upload" src="{{ image.image.url }}" alt="uploaded image" width="250">
+        <img src="{{ image.image.url }}">
     {% endfor %}
+    
+    </div>
 
-    {% endif %}
-</div>
-
-<div class="upload-box">
     <!--이미지 파일명 박스-->
+    <div class="upload-box">
     {% if request.user.is_authenticated %}
     <div class="upload-title">
-         IMG_3666.JPG
-
     </div>
-        <form method="post" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <div class="upload-button">
@@ -118,7 +111,7 @@
             </div>
         </form>
     {% endif %}
-</div>
+    </div>
 
     <script>
         // JavaScript를 사용하여 파일 입력 필드를 감추고 버튼 클릭 시 파일 선택 창을 열도록 설정
@@ -130,8 +123,9 @@
     <!--엔터 버튼-->
     {% if request.user.is_authenticated %}
     <div class="enter-button">
-         Enter
+        <a href="{% url 'home:result' %}">Enter</a>
     </div>
     {% endif %}
+    
 {% endblock %}
 

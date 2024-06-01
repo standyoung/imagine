@@ -1,18 +1,11 @@
-from django.conf import settings
-from accounts.models import User
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts   import render, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate
 
-from django.contrib.auth import login as auth_login
-from django.contrib.auth.hashers import make_password
-
-from django.forms import model_to_dict
-from django.contrib import auth
-
-from .forms import AccountAuthForm
 # create한 login 함수랑 겹치면 안됨
+from django.contrib.auth import login as auth_login
+
+from django.contrib.auth.hashers import make_password
 
 from .models import User
 
@@ -63,8 +56,12 @@ def signup(request):
         )
         user.save()
 
-        # 회원가입 후, 로그인까지 바로 진행
-        return render(request,'home/home.html')
+        # 회원가입 후, 로그인 진행
+        new_user = authenticate(username=request.POST['username'], password=request.POST['password'])
+        if new_user is not None:
+            auth_login(request, new_user)
+            return redirect('home:home')  # 홈으로 이동
+
     return render(request, 'account/signup.html')
 
 def signup_done(request):

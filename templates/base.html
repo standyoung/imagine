@@ -6,8 +6,10 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Imagine : 감성노래 추천 웹서비스</title>
+    <title>Imagine : 감성노래 추천 웹서비스🎵</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
+    <link rel="icon" href="{% static 'images/favicon.png' %}">
+
     <style>
         body {
             background-color: #FDF4C9;
@@ -82,7 +84,7 @@
         </div>
         <div class="nav-links">
             {% if request.user.is_authenticated %}
-                <a href={% url 'accounts:logout' %} id="logout-link">Logout</a>
+                <a href="{% url 'accounts:logout' %}" id="logout-link">Logout</a>
                 <!--로그아웃 요청은 POST 요청 <a>는 GET 요청이므로 JS를 이용하여 POST 요청-->
                 <form id="logout-form" method="post" action="{% url 'accounts:logout' %}" style="display:none;">
                     {% csrf_token %}
