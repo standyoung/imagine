@@ -1,14 +1,11 @@
 <!DOCTYPE html>
-{% block content %}
-{% block title %}Imagine : 감성노래 추천 웹서비스{% endblock %}
-{% endblock %}
 {% load static %}
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Imagine : 감성노래 추천 웹서비스🎵</title>
+    <title>{% block title %}Imagine : 감성노래 추천 웹서비스{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
-    <link rel="icon" href="{% static 'images/favicon.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
 
     <style>
         body {
@@ -71,11 +68,18 @@
             box-sizing: border-box;
         }
     </style>
+
+<!--자식 style 템플릿에 들어갈 부분-->
 {% block style %}
 {% endblock %}
+
 </head>
+
+
 <body>
+
     <div class="header">
+
         <div class="menu">
             <a href="{% url 'mypage:like' %}">Menu</a>
         </div>
@@ -84,7 +88,7 @@
         </div>
         <div class="nav-links">
             {% if request.user.is_authenticated %}
-                <a href="{% url 'accounts:logout' %}" id="logout-link">Logout</a>
+                <a href={% url 'accounts:logout' %} id="logout-link">Logout</a>
                 <!--로그아웃 요청은 POST 요청 <a>는 GET 요청이므로 JS를 이용하여 POST 요청-->
                 <form id="logout-form" method="post" action="{% url 'accounts:logout' %}" style="display:none;">
                     {% csrf_token %}
@@ -95,11 +99,11 @@
             {% endif %}
         </div>
     </div>
-    <div class="main-container">
-    </div>
-</body>
-</html>
-
+    
+<!--자식 content 템플릿에 들어갈 부분-->
+{% block content %}
+{% endblock %}
+    
 {#    logout POST 요청#}
 <script>
     document.getElementById('logout-link').addEventListener('click', function(event) {
@@ -107,3 +111,6 @@
         document.getElementById('logout-form').submit();
     });
 </script>
+
+</body>
+</html>

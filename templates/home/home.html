@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
-
-{% block script %}
-
-{% endblock %}
-
 {% load static %}
 
 {% block style %}
-
 <style>
     .img-box {
         display: flex;
@@ -83,7 +77,9 @@
     }
 </style>
 {% endblock %}
+
 {% block content %}
+
     <!--이미지 업로드 박스-->
     <div class="img-box">
     {% for image in images %}
