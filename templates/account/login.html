@@ -7,101 +7,108 @@
 {% load static %}
 
 {% block style %}
-<style>
-    .container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 150px;
-    }
-    .login-input-section-wrap {
-        padding-top: 100px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .login-input-wrap {
-        width: 465px;
-        height: 48px;
-        border: 3px solid rgb(94, 130, 35);
-        background: white;
-        border-radius: 40px;
-        margin-bottom: 40px;
-    }
-    .login-input-wrap input {
-        border: none;
-        width: 430px;
-        margin-top: 8px;
-        font-size: 14px;
-        margin-left: 14px;
-        height: 30px;
-    }
-    .social-login-wrap {
-        display: flex;
-        justify-content: space-around;
-        padding: 0 20px;
-        margin: 20px 0;
-    }
-    .social-button {
-        background: none;
-        border: 2px solid #5E8223;
-        border-radius: 50%;
-        width: 55px;
-        height: 55px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        font-size: 16px;
-        color: #5E8223;
-        cursor: pointer;
-        margin: 0 20px;
-        overflow: hidden;
-        white-space: nowrap;
-    }
-    .login-button-wrap {
-        padding-top: 20px;
-    }
-    .login-button-wrap button {
-        width: 100px;
-        height: 40px;
-        font-family: "Noto Serif KR";
-        font-size: 22px;
-        font-weight: 700;
-        background: none;
-        color: rgb(94, 130, 35);
-        border: none;
-        cursor: pointer;
-    }
-</style>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 150px;
+        }
+
+        .login-input-section-wrap {
+            padding-top: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .login-input-wrap {
+            width: 465px;
+            height: 48px;
+            border: 3px solid rgb(94, 130, 35);
+            background: white;
+            border-radius: 40px;
+            margin-bottom: 40px;
+        }
+
+        .login-input-wrap input {
+            border: none;
+            width: 430px;
+            margin-top: 8px;
+            font-size: 14px;
+            margin-left: 14px;
+            height: 30px;
+        }
+
+        .social-login-wrap {
+            display: flex;
+            justify-content: space-around;
+            padding: 0 20px;
+            margin: 20px 0;
+        }
+
+        .social-button {
+            background: none;
+            border: 2px solid #5E8223;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 16px;
+            color: #5E8223;
+            cursor: pointer;
+            margin: 0 20px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .login-button-wrap {
+            padding-top: 20px;
+        }
+
+        .login-button-wrap button {
+            width: 100px;
+            height: 40px;
+            font-family: "Noto Serif KR";
+            font-size: 22px;
+            font-weight: 700;
+            background: none;
+            color: rgb(94, 130, 35);
+            border: none;
+            cursor: pointer;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="main-wrap">
-        <!-- 로그인 섹션 -->
-            <section class="login-input-section-wrap">
-                <div class="login-input-wrap">
-                    <input placeholder="ID" type="text" name="username">
-                </div>
-                <div class="login-input-wrap password-wrap">
-                    <input placeholder="Password" type="password" name="password">
-                </div>
-            <!-- 소셜 로그인 버튼 -->
-                <div class="social-login-wrap">
-                    <button class="social-button naver">N</button>
-                    <button class="social-button kakao">T</button>
-                    <button class="social-button google">G</button>
-                </div>
-                <div class="login-button-wrap">
-                    <button type="submit">Login</button>
-                </div>
-            </section>
-        </div>
-    </form>
-</div>
+    <div class="container">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="main-wrap">
+                <!-- 로그인 섹션 -->
+                <section class="login-input-section-wrap">
+                    <div class="login-input-wrap">
+                        <input placeholder="ID" type="text" name="username">
+                    </div>
+                    <div class="login-input-wrap password-wrap">
+                        <input placeholder="Password" type="password" name="password">
+                    </div>
+                    <!-- 소셜 로그인 버튼 -->
+                    <div class="social-login-wrap">
+                        <button class="social-button naver">N</button>
+                        <button class="social-button kakao">T</button>
+                        <button class="social-button google">G</button>
+                    </div>
+                    <div class="login-button-wrap">
+                        <button type="submit">Login</button>
+                    </div>
+                </section>
+            </div>
+        </form>
+    </div>
 {% endblock %}

@@ -6,6 +6,7 @@
     <title>{% block title %}Imagine : 감성노래 추천 웹서비스{% endblock %}</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 추가 -->
 
     <style>
         body {
@@ -14,6 +15,7 @@
             padding: 0;
             font-family: "Noto Serif KR", serif;
         }
+
         .header {
             display: flex;
             flex-direction: column;
@@ -29,14 +31,17 @@
             background: none;
             box-sizing: border-box;
         }
+
         .header a {
             text-decoration: none;
             color: inherit;
         }
+
         .menu, .logo, .nav-links {
             display: flex;
             align-items: center;
         }
+
         .menu {
             position: absolute;
             top: 20px;
@@ -45,12 +50,14 @@
             font-size: 18px;
             font-weight: 400;
         }
+
         .logo {
             position: absolute;
             top: 78px;
             left: 50%;
             transform: translateX(-50%);
         }
+
         .nav-links {
             position: absolute;
             top: 20px;
@@ -59,6 +66,7 @@
             font-size: 18px;
             font-weight: 400;
         }
+
         .main-container {
             display: flex;
             flex-direction: column;
@@ -69,44 +77,44 @@
         }
     </style>
 
-<!--자식 style 템플릿에 들어갈 부분-->
-{% block style %}
-{% endblock %}
+    <!--자식 style 템플릿에 들어갈 부분-->
+    {% block style %}
+    {% endblock %}
 
 </head>
 
 
 <body>
 
-    <div class="header">
+<div class="header">
 
-        <div class="menu">
-            <a href="{% url 'mypage:like' %}">Menu</a>
-        </div>
-        <div class="logo">
-            <a href="{% url 'home:home' %}">Imagine</a>
-        </div>
-        <div class="nav-links">
-            {% if request.user.is_authenticated %}
-                <a href={% url 'accounts:logout' %} id="logout-link">Logout</a>
-                <!--로그아웃 요청은 POST 요청 <a>는 GET 요청이므로 JS를 이용하여 POST 요청-->
-                <form id="logout-form" method="post" action="{% url 'accounts:logout' %}" style="display:none;">
-                    {% csrf_token %}
-                </form>
-            {% else %}
-                <a href="{% url 'accounts:login' %}">Login</a>
-                <a href="{% url 'accounts:signup' %}">Sign up</a>
-            {% endif %}
-        </div>
+    <div class="menu">
+        <a href="{% url 'mypage:like' %}">Menu</a>
     </div>
-    
+    <div class="logo">
+        <a href="{% url 'home:home' %}">Imagine</a>
+    </div>
+    <div class="nav-links">
+        {% if request.user.is_authenticated %}
+            <a href={% url 'accounts:logout' %} id="logout-link">Logout</a>
+            <!--로그아웃 요청은 POST 요청 <a>는 GET 요청이므로 JS를 이용하여 POST 요청-->
+            <form id="logout-form" method="post" action="{% url 'accounts:logout' %}" style="display:none;">
+                {% csrf_token %}
+            </form>
+        {% else %}
+            <a href="{% url 'accounts:login' %}">Login</a>
+            <a href="{% url 'accounts:signup' %}">Sign up</a>
+        {% endif %}
+    </div>
+</div>
+
 <!--자식 content 템플릿에 들어갈 부분-->
 {% block content %}
 {% endblock %}
-    
+
 {#    logout POST 요청#}
 <script>
-    document.getElementById('logout-link').addEventListener('click', function(event) {
+    document.getElementById('logout-link').addEventListener('click', function (event) {
         event.preventDefault();
         document.getElementById('logout-form').submit();
     });

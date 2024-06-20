@@ -24,12 +24,14 @@ secret_file = os.path.join(BASE_DIR, 'secrets.json')
 with open(secret_file) as f:
     secrets = json.loads(f.read())
 
+
 def get_secret(setting, secrets=secrets):
     try:
         return secrets[setting]
     except KeyError:
         error_msg = "Set the {} environment variable".format(setting)
         raise ImproperlyConfigured(error_msg)
+
 
 SECRET_KEY = get_secret("SECRET_KEY")
 
@@ -55,7 +57,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    
+
     # 외부 소셜 서비스
     'allauth.socialaccount.providers.naver',
     'allauth.socialaccount.providers.kakao',
@@ -116,10 +118,10 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1 # 사이트 아이디 기본값
+SITE_ID = 1  # 사이트 아이디 기본값
 
-ACCOUNT_EMAIL_REQUIRED = True # 계정 이메일이 필요한가?
-ACCOUNT_EMAIL_VERIFICATION = 'none' # 이메일 검증 과정이 필요한가?
+ACCOUNT_EMAIL_REQUIRED = True  # 계정 이메일이 필요한가?
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # 이메일 검증 과정이 필요한가?
 
 # # 소셜 로그인 설정
 # SOCIALACCOUNT_PROVIDERS = {
@@ -204,4 +206,3 @@ ALLOWED_FILE_TYPES = [
     'images/png',
     'images/gif',
 ]
-

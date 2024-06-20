@@ -3,401 +3,427 @@
 {% load static %}
 
 {% block style %}
-<style>
-    .signup-container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-top: 150px;
-    }
-    .form {
-        padding-top: 70px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .userInput {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .userInput h3 {
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: 700;
-        color: rgb(94, 130, 35);
-    }
-    .userInput input,
-    .userInput select {
-        width: 100%;
-        height: 33px;
-        border: 3px solid rgb(94, 130, 35);
-        background: white;
-        border-radius: 40px;
-        font-size: 14px;
-        padding-left: 14px;
-        box-sizing: border-box;
-    }
-    .mailInput {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .mailInput h3 {
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: 700;
-        color: rgb(94, 130, 35);
-    }
-    .mailInput input,
-    .mailInput select {
-        width: 46%;
-        height: 33px;
-        border: 3px solid rgb(94, 130, 35);
-        background: white;
-        border-radius: 40px;
-        font-size: 14px;
-        padding-left: 14px;
-        box-sizing: border-box;
-    }
-    .userInput input[type="date"] {
-        padding-left: 10px;
-    }
-    .userInput input[type="radio"] {
-        width: auto;
-        margin-right: 10px;
-    }
-    .privacy-button {
-        padding-top: 40px;
-    }
-    .privacy-button input {
-        width: 100px;
-        height: 40px;
-        font-family: "Noto Serif KR";
-        font-size: 15px;
-        font-weight: 700;
-        background: none;
-        color: rgb(94, 130, 35);
-        border: none;
-        cursor: pointer;
-    }
-    .signup-button {
-        padding-top: 40px;
-    }
-    .signup-button input {
-        width: 100px;
-        height: 40px;
-        font-family: "Noto Serif KR";
-        font-size: 22px;
-        font-weight: 700;
-        background: none;
-        color: rgb(94, 130, 35);
-        border: none;
-        cursor: pointer;
-    }
-    .email-wrap {
-        display: flex;
-        align-items: center;
-    }
-    .email-wrap input {
-        width: calc(100% - 100px);
-    }
-    .email-wrap select {
-        width: 100px;
-        height: 48px;
-        border: 3px solid rgb(94, 130, 35);
-        background: white;
-        border-radius: 40px;
-        font-size: 14px;
-        padding-left: 10px;
-        margin-left: 10px;
-        box-sizing: border-box;
-    }
-    .error-message {
-        color: yellow;
-        font-size: 15px;
-    }
-    .popup {
-        display: none;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        max-width: 600px;
-        padding: 20px;
-        background-color: white;
-        border: 2px solid #5E8223;
-        border-radius: 10px;
-        z-index: 1000;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
-    .popup-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 18px;
-        font-weight: 700;
-        color: rgb(94, 130, 35);
-        margin-bottom: 20px;
-    }
-    .popup-content {
-        font-size: 14px;
-        color: #333;
-    }
-    .popup-close {
-        cursor: pointer;
-        font-size: 18px;
-        color: #333;
-    }
-    .overlay {
-        display: none;
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-    }
-    .popup-footer { /* 체크박스와 "Agree" 텍스트의 스타일 추가 */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 20px;
-    }
-    .popup-footer input {
-        margin-right: 10px;
-    }
-</style>
+    <style>
+        .signup-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 150px;
+        }
+
+        .form {
+            padding-top: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .userInput {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .userInput h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: rgb(94, 130, 35);
+        }
+
+        .userInput input,
+        .userInput select {
+            width: 100%;
+            height: 33px;
+            border: 3px solid rgb(94, 130, 35);
+            background: white;
+            border-radius: 40px;
+            font-size: 14px;
+            padding-left: 14px;
+            box-sizing: border-box;
+        }
+
+        .mailInput {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .mailInput h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: rgb(94, 130, 35);
+        }
+
+        .mailInput input,
+        .mailInput select {
+            width: 46%;
+            height: 33px;
+            border: 3px solid rgb(94, 130, 35);
+            background: white;
+            border-radius: 40px;
+            font-size: 14px;
+            padding-left: 14px;
+            box-sizing: border-box;
+        }
+
+        .userInput input[type="date"] {
+            padding-left: 10px;
+        }
+
+        .userInput input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .privacy-button {
+            padding-top: 40px;
+        }
+
+        .privacy-button input {
+            width: 100px;
+            height: 40px;
+            font-family: "Noto Serif KR";
+            font-size: 15px;
+            font-weight: 700;
+            background: none;
+            color: rgb(94, 130, 35);
+            border: none;
+            cursor: pointer;
+        }
+
+        .signup-button {
+            padding-top: 40px;
+        }
+
+        .signup-button input {
+            width: 100px;
+            height: 40px;
+            font-family: "Noto Serif KR";
+            font-size: 22px;
+            font-weight: 700;
+            background: none;
+            color: rgb(94, 130, 35);
+            border: none;
+            cursor: pointer;
+        }
+
+        .email-wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        .email-wrap input {
+            width: calc(100% - 100px);
+        }
+
+        .email-wrap select {
+            width: 100px;
+            height: 48px;
+            border: 3px solid rgb(94, 130, 35);
+            background: white;
+            border-radius: 40px;
+            font-size: 14px;
+            padding-left: 10px;
+            margin-left: 10px;
+            box-sizing: border-box;
+        }
+
+        .error-message {
+            color: yellow;
+            font-size: 15px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #5E8223;
+            border-radius: 10px;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: rgb(94, 130, 35);
+            margin-bottom: 20px;
+        }
+
+        .popup-content {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .popup-close {
+            cursor: pointer;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .popup-footer { /* 체크박스와 "Agree" 텍스트의 스타일 추가 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .popup-footer input {
+            margin-right: 10px;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
     <script>
-    function openPrivacyPopup() {
-        document.getElementById('privacy-popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
-    }
-
-    function closePrivacyPopup() {
-        document.getElementById('privacy-popup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
-    }
-
-    function agreeAndClosePopup() {
-        if (document.getElementById('agree-checkbox').checked) { // 체크박스가 체크되었는지 확인
-            closePrivacyPopup(); // 체크되면 팝업 닫기
+        function openPrivacyPopup() {
+            document.getElementById('privacy-popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
         }
-    }
 
-    function showWarningPopup(message) {
-        document.getElementById('warning-popup-message').innerText = message; // 메시지 설정
-        document.getElementById('warning-popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
-    }
+        function closePrivacyPopup() {
+            document.getElementById('privacy-popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
+        }
 
-    function closeWarningPopup() {
-        document.getElementById('warning-popup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
-    }
-
-    function showPrivacyWarningPopup() {
-        document.getElementById('privacy-warning-popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
-    }
-
-    function closePrivacyWarningPopup() {
-        document.getElementById('privacy-warning-popup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
-    }
-
-    // 폼 검증 및 제출
-    document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('.signup-button input').addEventListener('click', function (event) {
-            // 폼 필드 값 가져오기
-            var username = document.querySelector('input[name="username"]').value;
-            var password = document.querySelector('input[name="password"]').value;
-            var nickname = document.querySelector('input[name="nickname"]').value;
-            var birth = document.querySelector('input[name="birth"]').value;
-            var gender = document.querySelector('input[name="gender"]:checked');
-            var email = document.querySelector('input[name="email"]').value;
-            var emailDetail = document.querySelector('select[name="email-detail"]').value;
-
-            // 모든 필드가 채워졌는지 확인
-            if (!username || !password || !nickname || !birth || !gender || !email || !emailDetail) {
-                event.preventDefault(); // 폼 제출 방지
-                showWarningPopup("Please enter all information."); // 경고 팝업창 표시
-                return; // 함수 종료
+        function agreeAndClosePopup() {
+            if (document.getElementById('agree-checkbox').checked) { // 체크박스가 체크되었는지 확인
+                closePrivacyPopup(); // 체크되면 팝업 닫기
             }
+        }
 
-            // 개인정보 동의 체크박스가 체크되지 않았을 경우
-            if (!document.getElementById('agree-checkbox').checked) {
-                event.preventDefault(); // 폼 제출 방지
-                showPrivacyWarningPopup(); // 개인정보 동의 경고 팝업창 표시
-            }
+        function showWarningPopup(message) {
+            document.getElementById('warning-popup-message').innerText = message; // 메시지 설정
+            document.getElementById('warning-popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
+        }
+
+        function closeWarningPopup() {
+            document.getElementById('warning-popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
+        }
+
+        function showPrivacyWarningPopup() {
+            document.getElementById('privacy-warning-popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block'; // 오버레이 표시
+        }
+
+        function closePrivacyWarningPopup() {
+            document.getElementById('privacy-warning-popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none'; // 오버레이 숨기기
+        }
+
+        // 폼 검증 및 제출
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('.signup-button input').addEventListener('click', function (event) {
+                // 폼 필드 값 가져오기
+                var username = document.querySelector('input[name="username"]').value;
+                var password = document.querySelector('input[name="password"]').value;
+                var nickname = document.querySelector('input[name="nickname"]').value;
+                var birth = document.querySelector('input[name="birth"]').value;
+                var gender = document.querySelector('input[name="gender"]:checked');
+                var email = document.querySelector('input[name="email"]').value;
+                var emailDetail = document.querySelector('select[name="email-detail"]').value;
+
+                // 모든 필드가 채워졌는지 확인
+                if (!username || !password || !nickname || !birth || !gender || !email || !emailDetail) {
+                    event.preventDefault(); // 폼 제출 방지
+                    showWarningPopup("Please enter all information."); // 경고 팝업창 표시
+                    return; // 함수 종료
+                }
+
+                // 개인정보 동의 체크박스가 체크되지 않았을 경우
+                if (!document.getElementById('agree-checkbox').checked) {
+                    event.preventDefault(); // 폼 제출 방지
+                    showPrivacyWarningPopup(); // 개인정보 동의 경고 팝업창 표시
+                }
+            });
         });
-    });
     </script>
-    
-<div class="signup-container">
-    <form action="{% url 'accounts:signup' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <div class="form">
-        <!-- 아이디 입력 -->
-            <div class="userInput">
-                <h3 class="list">
-                    ID
-                </h3>
-                <span id="idError"></span>
-                <input name="username" type="text" value="">
-            </div>
 
-        <!-- 비밀번호 입력 -->
-            <div class="userInput">
-                <h3 class="list">
-                    Password
-                </h3>
-                <span id="pwError"></span>
-                <input name="password" type="password" value="">
-            </div>
-
-            <!-- 이름 입력 -->
-            <div class="userInput">
-                <h3 class="list">
-                    Name
-                    <span id="nameError"></span>
-                </h3>
-                <input name="nickname" type="text" value="">
-            </div>
-
-            <!-- 생일 입력 -->
-            <div class="userInput">
-                <h3 class="list">
-                    Date of Birth
-                    <span id="birthError"></span>
-                </h3>
-                <div>
-                    <input name="birth" type="date" placeholder="Year()">
+    <div class="signup-container">
+        <form action="{% url 'accounts:signup' %}" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form">
+                <!-- 아이디 입력 -->
+                <div class="userInput">
+                    <h3 class="list">
+                        ID
+                    </h3>
+                    <span id="idError"></span>
+                    <input name="username" type="text" value="">
                 </div>
-            </div>
 
-            <!-- 성별 입력 -->
-            <div class="userInput">
-                <h3 class="list">
-                    Gender
-                    <span id="genderError"></span>
-                </h3>
-                <label>
-                    <!--여성 or 남성으로 value 값이 POST됨-->
-                    <input name="gender" type="radio" value="여성">
-                    Women
-                </label>
-                <label>
-                    <input name="gender" type="radio" value="남성">
-                    Men
-                </label>
-            </div>
+                <!-- 비밀번호 입력 -->
+                <div class="userInput">
+                    <h3 class="list">
+                        Password
+                    </h3>
+                    <span id="pwError"></span>
+                    <input name="password" type="password" value="">
+                </div>
 
-            <!-- 이메일 입력 -->
-            <div class="mailInput">
-                <h3 class="list">
-                    E-mail
-                    <span id="emailError"></span>
-                </h3>
-                <input name="email" type="text" value="">
-                <span>   @ </span>
-                <!-- 이메일 택일 -->
-                <select name="email-detail" id="mail_Select">
-                    <option>naver.com</option>
-                    <option>gmail.com</option>
-                    <option>daum.net</option>
-                    <option>hanmail.net</option>
-                    <option>hotmail.com</option>
-                    <option>nate.com</option>
-                    <option>freechal.com</option>
-                    <option>lycos.co.kr</option>
-                    <option>korea.com</option>
-                    <option>hanmir.com</option>
-                    <option>dreamwiz.com</option>
-                    <option>paran.com</option>
-                </select>
-            </div>
+                <!-- 이름 입력 -->
+                <div class="userInput">
+                    <h3 class="list">
+                        Name
+                        <span id="nameError"></span>
+                    </h3>
+                    <input name="nickname" type="text" value="">
+                </div>
 
-            <!-- 개인정보 수집 동의 / url 변경-->
-            <div class="privacy-button">
-                <a href="javascript:void(0)" onclick="openPrivacyPopup()">User Privacy agreement</a>
-            </div>
+                <!-- 생일 입력 -->
+                <div class="userInput">
+                    <h3 class="list">
+                        Date of Birth
+                        <span id="birthError"></span>
+                    </h3>
+                    <div>
+                        <input name="birth" type="date" placeholder="Year()">
+                    </div>
+                </div>
 
-            <!-- 회원가입 버튼 -->
-            <div class="signup-button"><input type="submit" value="Sign up"></div>
+                <!-- 성별 입력 -->
+                <div class="userInput">
+                    <h3 class="list">
+                        Gender
+                        <span id="genderError"></span>
+                    </h3>
+                    <label>
+                        <!--여성 or 남성으로 value 값이 POST됨-->
+                        <input name="gender" type="radio" value="여성">
+                        Women
+                    </label>
+                    <label>
+                        <input name="gender" type="radio" value="남성">
+                        Men
+                    </label>
+                </div>
+
+                <!-- 이메일 입력 -->
+                <div class="mailInput">
+                    <h3 class="list">
+                        E-mail
+                        <span id="emailError"></span>
+                    </h3>
+                    <input name="email" type="text" value="">
+                    <span>   @ </span>
+                    <!-- 이메일 택일 -->
+                    <select name="email-detail" id="mail_Select">
+                        <option>naver.com</option>
+                        <option>gmail.com</option>
+                        <option>daum.net</option>
+                        <option>hanmail.net</option>
+                        <option>hotmail.com</option>
+                        <option>nate.com</option>
+                        <option>freechal.com</option>
+                        <option>lycos.co.kr</option>
+                        <option>korea.com</option>
+                        <option>hanmir.com</option>
+                        <option>dreamwiz.com</option>
+                        <option>paran.com</option>
+                    </select>
+                </div>
+
+                <!-- 개인정보 수집 동의 / url 변경-->
+                <div class="privacy-button">
+                    <a href="javascript:void(0)" onclick="openPrivacyPopup()">User Privacy agreement</a>
+                </div>
+
+                <!-- 회원가입 버튼 -->
+                <div class="signup-button"><input type="submit" value="Sign up"></div>
+            </div>
+            <div>
+                {% if request.GET.result == 'passfail' %}
+                    <p style="color: yellow;font-size:15px;">비밀번호가 일치하지 않습니다.</p>
+                {% endif %}
+                {% if request.GET.result == 'nfail' %}
+                    <p style="color: yellow;font-size:15px;">이름을 입력하십시오.</p>
+                {% endif %}
+                {% if request.GET.result == 'idfail' %}
+                    <p style="color: yellow;font-size:15px;">아이디를 입력하십시오.</p>
+                {% endif %}
+                {% if request.GET.result == 'phfail' %}
+                    <p style="color: yellow;font-size:15px;">전화번호를 입력하십시오.</p>
+                {% endif %}
+                {% if request.GET.result == 'iddup' %}
+                    <p style="color: yellow;font-size:15px;">이미 존재하는 아이디입니다.</p>
+                {% endif %}
+                {% if request.GET.result == 'phdup' %}
+                    <p style="color: yellow;font-size:15px;">이미 존재하는 전화번호입니다.</p>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+
+    <div id="privacy-popup" class="popup">
+        <div class="popup-header">
+            <span>Privacy Policy</span>
+            <!-- 닫기 버튼에 팝업 닫기 함수 연결 -->
+            <span class="popup-close" onclick="closePrivacyPopup()">&#x2715;</span>
         </div>
-        <div>
-            {% if request.GET.result == 'passfail' %}
-            <p style="color: yellow;font-size:15px;">비밀번호가 일치하지 않습니다.</p>
-            {% endif %}
-            {% if request.GET.result == 'nfail' %}
-            <p style="color: yellow;font-size:15px;">이름을 입력하십시오.</p>
-            {% endif %}
-            {% if request.GET.result == 'idfail' %}
-            <p style="color: yellow;font-size:15px;">아이디를 입력하십시오.</p>
-            {% endif %}
-            {% if request.GET.result == 'phfail' %}
-            <p style="color: yellow;font-size:15px;">전화번호를 입력하십시오.</p>
-            {% endif %}
-            {% if request.GET.result == 'iddup' %}
-            <p style="color: yellow;font-size:15px;">이미 존재하는 아이디입니다.</p>
-            {% endif %}
-            {% if request.GET.result == 'phdup' %}
-            <p style="color: yellow;font-size:15px;">이미 존재하는 전화번호입니다.</p>
-            {% endif %}
+        <div class="popup-content">
+            <p>1. Purpose of Collecting·Using personal information<br>
+                This service intends to collect user's personal information for the purpose of 'providing services', and
+                the collected personal information is used only for the purpose of providing services.<br>
+                2. Articles of personal information we want to collect<br>
+                The Articles of personal information are name, date of birth, gender, and e-mail.<br>
+                3. Period of retention and use of personal information<br>
+                The collected personal information will be kept for three years.<br>
+                4. Right to refusal and disadvantage due to refusal of consent<br>
+                You may refuse to consent to the collection and using of personal information, but if you refuse, your
+                use may be restricted.<br>
+            </p>
+            <!-- 팝업 푸터에 체크박스와 "Agree" 텍스트 추가 -->
+            <div class="popup-footer">
+                <input type="checkbox" id="agree-checkbox" onclick="agreeAndClosePopup()"> Agree
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+    </div>
+    <!-- 개인정보 동의 미완료 경고 팝업창 추가 -->
+    <div id="privacy-warning-popup" class="popup">
+        <div class="popup-header">
+            <span>Warning</span> <!-- 경고 팝업창 제목 -->
+            <span class="popup-close" onclick="closePrivacyWarningPopup()">&#x2715;</span> <!-- 팝업 닫기 버튼 -->
+        </div>
+        <div class="popup-content">
+            <p>Please agree to the privacy policy before signing up.</p> <!-- 경고 메시지 내용 -->
+        </div>
+    </div>
 
-<div id="privacy-popup" class="popup">
-    <div class="popup-header">
-        <span>Privacy Policy</span>
-        <!-- 닫기 버튼에 팝업 닫기 함수 연결 -->
-        <span class="popup-close" onclick="closePrivacyPopup()">&#x2715;</span>
+    <!-- 모든 정보 미완료 경고 팝업창 추가 -->
+    <div id="warning-popup" class="popup">
+        <div class="popup-header">
+            <span>Warning</span> <!-- 경고 팝업창 제목 -->
+            <span class="popup-close" onclick="closeWarningPopup()">&#x2715;</span> <!-- 팝업 닫기 버튼 -->
+        </div>
+        <div class="popup-content">
+            <p id="warning-popup-message">Please enter all information.</p> <!-- 경고 메시지 내용 -->
+        </div>
     </div>
-    <div class="popup-content">
-        <p>1. Purpose of Collecting·Using personal information<br>
-            This service intends to collect user's personal information for the purpose of 'providing services', and the collected personal information is used only for the purpose of providing services.<br>
-            2. Articles of personal information we want to collect<br>
-            The Articles of personal information are name, date of birth, gender, and e-mail.<br>
-            3. Period of retention and use of personal information<br>
-            The collected personal information will be kept for three years.<br>
-            4. Right to refusal and disadvantage due to refusal of consent<br>
-            You may refuse to consent to the collection and using of personal information, but if you refuse, your use may be restricted.<br>
-        </p>
-        <!-- 팝업 푸터에 체크박스와 "Agree" 텍스트 추가 -->
-    <div class="popup-footer">
-        <input type="checkbox" id="agree-checkbox" onclick="agreeAndClosePopup()"> Agree
-    </div>
-</div>
-    </div>
-</div>
-<!-- 개인정보 동의 미완료 경고 팝업창 추가 -->
-<div id="privacy-warning-popup" class="popup">
-    <div class="popup-header">
-        <span>Warning</span> <!-- 경고 팝업창 제목 -->
-        <span class="popup-close" onclick="closePrivacyWarningPopup()">&#x2715;</span> <!-- 팝업 닫기 버튼 -->
-    </div>
-    <div class="popup-content">
-        <p>Please agree to the privacy policy before signing up.</p> <!-- 경고 메시지 내용 -->
-    </div>
-</div>
-
-<!-- 모든 정보 미완료 경고 팝업창 추가 -->
-<div id="warning-popup" class="popup">
-    <div class="popup-header">
-        <span>Warning</span> <!-- 경고 팝업창 제목 -->
-        <span class="popup-close" onclick="closeWarningPopup()">&#x2715;</span> <!-- 팝업 닫기 버튼 -->
-    </div>
-    <div class="popup-content">
-        <p id="warning-popup-message">Please enter all information.</p> <!-- 경고 메시지 내용 -->
-    </div>
-</div>
-<!-- 팝업 오버레이 추가 -->
-<div id="overlay" class="overlay"></div>
+    <!-- 팝업 오버레이 추가 -->
+    <div id="overlay" class="overlay"></div>
 {% endblock %}

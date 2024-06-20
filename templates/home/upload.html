@@ -8,124 +8,127 @@
 
 {% block style %}
 
-<style>
-    /* 숨겨진 파일 입력 필드 */
-    #file-input {
-        display: none;
-    }
+    <style>
+        /* 숨겨진 파일 입력 필드 */
+        #file-input {
+            display: none;
+        }
 
-    .img-box {
-        display: flex;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 200px;
-        position: relative;
-        width: 350px;
-        height: 320px;
-        background: rgb(254, 254, 254);
-        border: 3px solid rgb(94, 130, 35);
-        border-radius: 40px;
-        box-sizing: border-box;
-        justify-content: center;
-        align-items: center;
-    }
-    .upload-box {
-        display: flex;
-        margin: 0 auto;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 575px;
-        position: absolute;
-        width: 100%;
-        max-width: 600px;
-        height: 50px;
-        align-items: center;
-        background: rgb(254, 254, 254);
-        border: 3px solid rgb(94, 130, 35);
-        border-radius: 40px;
-        box-sizing: border-box;
-        z-index: 1;
-    }
-    .upload-title {
-        flex-grow: 1;
-        font-family: "Noto Serif KR";
-        font-size: 20px;
-        color: #333;
-        margin-left: 20px;
-    }
-    .upload-button {
-        background: none;
-        display: flex;
-        align-items: center;
-    }
-    .upload-button button {
-        margin-left: auto;
-        width: auto;
-        margin-right: 20px;
-        padding: 0;
-        font-family: "Noto Serif KR";
-        font-size: 20px;
-        font-weight: 700;
-        color: rgb(94, 130, 35);
-        border : none;
-        background: none;
-        cursor: pointer;
-    }
-    .enter-button {
-        position: absolute;
-        top: 670px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        cursor : pointer
-    }
-    .enter-button a {
-        color: rgb(94, 130, 35);
-        font-family: "Noto Serif KR";
-        font-size: 22px;
-        font-weight: 700;
-        text-decoration: none;
-    }
-</style>
+        .img-box {
+            display: flex;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 200px;
+            position: relative;
+            width: 350px;
+            height: 320px;
+            background: rgb(254, 254, 254);
+            border: 3px solid rgb(94, 130, 35);
+            border-radius: 40px;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-box {
+            display: flex;
+            margin: 0 auto;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 575px;
+            position: absolute;
+            width: 100%;
+            max-width: 600px;
+            height: 50px;
+            align-items: center;
+            background: rgb(254, 254, 254);
+            border: 3px solid rgb(94, 130, 35);
+            border-radius: 40px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .upload-title {
+            flex-grow: 1;
+            font-family: "Noto Serif KR";
+            font-size: 20px;
+            color: #333;
+            margin-left: 20px;
+        }
+
+        .upload-button {
+            background: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .upload-button button {
+            margin-left: auto;
+            width: auto;
+            margin-right: 20px;
+            padding: 0;
+            font-family: "Noto Serif KR";
+            font-size: 20px;
+            font-weight: 700;
+            color: rgb(94, 130, 35);
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .enter-button {
+            position: absolute;
+            top: 670px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            cursor: pointer
+        }
+
+        .enter-button a {
+            color: rgb(94, 130, 35);
+            font-family: "Noto Serif KR";
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
 {% endblock %}
 {% block content %}
     <!--이미지 업로드 박스-->
     <div class="img-box">
-    {% for image in images %}
-        <img src="{{ image.image.url }}">
-    {% endfor %}
-    
+        <img src="{{ home.image.url }}">
     </div>
 
     <!--이미지 파일명 박스-->
     <div class="upload-box">
-    {% if request.user.is_authenticated %}
-    <div class="upload-title">
-    </div>
-        <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="upload-button">
-                <button type="submit">Upload</button>
-                <input type="file" id="file-input">
+        {% if request.user.is_authenticated %}
+            <div class="upload-title">
             </div>
-        </form>
-    {% endif %}
+            <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="upload-button">
+                    <button type="submit">Upload</button>
+                    <input type="file" id="file-input">
+                </div>
+            </form>
+        {% endif %}
     </div>
 
     <script>
         // JavaScript를 사용하여 파일 입력 필드를 감추고 버튼 클릭 시 파일 선택 창을 열도록 설정
-        document.querySelector('.upload-button').addEventListener('click', function() {
+        document.querySelector('.upload-button').addEventListener('click', function () {
             document.getElementById('file-input').click();
         });
     </script>
 
     <!--엔터 버튼-->
     {% if request.user.is_authenticated %}
-    <div class="enter-button">
-        <a href="{% url 'home:result' %}">Enter</a>
-    </div>
+        <div class="enter-button">
+            <a href="{% url 'home:result' %}">Enter</a>
+        </div>
     {% endif %}
-    
+
 {% endblock %}
 

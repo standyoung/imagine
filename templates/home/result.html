@@ -3,152 +3,152 @@
 {% load static %}
 
 {% block style %}
-<style>
-    .container {
-        position: absolute;
-        top: 150px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
+    <style>
+        .container {
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
 
-    .image-section {
-        margin: 40px 0;
-        width: 350px;
-        height: 320px;
-        background: rgb(254, 254, 254);
-        border: 3px solid rgb(94, 130, 35);
-        border-radius: 40px;
-        box-sizing: border-box;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+        .image-section {
+            margin: 40px 0;
+            width: 350px;
+            height: 320px;
+            background: rgb(254, 254, 254);
+            border: 3px solid rgb(94, 130, 35);
+            border-radius: 40px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .description {
-        background-color: #fff;
-        border: 3px solid #5e8223;
-        border-radius: 40px;
-        display: inline-block;
-        padding: 15px 30px;
-        font-size: 18px;
-        margin-bottom: 30px;
-        width: 80%;       /* width를 100%로 설정하여 부모 컨테이너의 너비에 맞춤 */
-        max-width: 700px;  /* 최대 너비를 700px로 설정 */
-        height: 50px;     /* 높이를 300px로 고정 */
-        overflow-y: auto;  /* 내용이 넘칠 경우 스크롤 생성 */
-    }
+        .description {
+            background-color: #fff;
+            border: 3px solid #5e8223;
+            border-radius: 40px;
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            margin-bottom: 30px;
+            width: 80%; /* width를 100%로 설정하여 부모 컨테이너의 너비에 맞춤 */
+            max-width: 700px; /* 최대 너비를 700px로 설정 */
+            height: 50px; /* 높이를 300px로 고정 */
+            overflow-y: auto; /* 내용이 넘칠 경우 스크롤 생성 */
+        }
 
-    /* 스크롤바 스타일 추가 */
-    .description::-webkit-scrollbar {
-        width: 12px;
-    }
+        /* 스크롤바 스타일 추가 */
+        .description::-webkit-scrollbar {
+            width: 12px;
+        }
 
-    .description::-webkit-scrollbar-thumb {
-        background-color: #5e8223;
-        border-radius: 20px;
-        border: 2px solid #fff;
-    }
+        .description::-webkit-scrollbar-thumb {
+            background-color: #5e8223;
+            border-radius: 20px;
+            border: 2px solid #fff;
+        }
 
-    .description::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 20px;
-        border: 1px solid #ddd;
-    }
+        .description::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
 
-    .music-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-    }
+        .music-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
 
-    .music-item {
-        display: flex;
-        align-items: center;
-        width: 90%;
-        max-width: 700px;
-        background-color: #fff;
-        border: 3px solid #5e8223;
-        border-radius: 40px;
-        margin-bottom: 15px;
-        padding: 10px;
-    }
+        .music-item {
+            display: flex;
+            align-items: center;
+            width: 90%;
+            max-width: 700px;
+            background-color: #fff;
+            border: 3px solid #5e8223;
+            border-radius: 40px;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
 
-    .music-image {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        margin-right: 20px;
-    }
+        .music-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 20px;
+        }
 
-    .music-info {
-        flex-grow: 1;
-        text-align: left;
-        font-size: 18px;
-        color: #5e8223;
-    }
+        .music-info {
+            flex-grow: 1;
+            text-align: left;
+            font-size: 18px;
+            color: #5e8223;
+        }
 
-    .music-actions {
-        display: flex;
-        align-items: center;
-    }
+        .music-actions {
+            display: flex;
+            align-items: center;
+        }
 
-    .play-button,
-    .favorite-button {
-        font-size: 24px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: #5e8223;
-        margin-left: 10px;
-    }
-</style>
+        .play-button,
+        .favorite-button {
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #5e8223;
+            margin-left: 10px;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="image-section">
-        <img class="img-upload" src="{% static 'images/christmas.png' %}" alt="menu" width="250">
-    </div>
-    <div class="description">
-        <p>Harmony of trees and lights, green and red is wonderful. It's full of Christmas mood.</p>
-    </div>
-    <div class="music-list">
-        <div class="music-item">
-            <img class="music-image" src="{% static 'images/mariah_carey.png' %}" alt="Mariah Carey">
-            <div class="music-info">
-                <p>Mariah Carey - All I Want for Christmas Is You</p>
+    <div class="container">
+        <div class="image-section">
+            <img class="img-upload" src="{% static 'images/christmas.png' %}" alt="menu" width="250">
+        </div>
+        <div class="description">
+            <p>Harmony of trees and lights, green and red is wonderful. It's full of Christmas mood.</p>
+        </div>
+        <div class="music-list">
+            <div class="music-item">
+                <img class="music-image" src="{% static 'images/mariah_carey.png' %}" alt="Mariah Carey">
+                <div class="music-info">
+                    <p>Mariah Carey - All I Want for Christmas Is You</p>
+                </div>
+                <div class="music-actions">
+                    <button class="play-button">&#9658;</button>
+                    <button class="favorite-button">&#9733;</button>
+                </div>
             </div>
-            <div class="music-actions">
-                <button class="play-button">&#9658;</button>
-                <button class="favorite-button">&#9733;</button>
+            <div class="music-item">
+                <img class="music-image" src="{% static 'images/ariana_grande.png' %}" alt="Ariana Grande">
+                <div class="music-info">
+                    <p>Ariana Grande - Last Christmas</p>
+                </div>
+                <div class="music-actions">
+                    <button class="play-button">&#9658;</button>
+                    <button class="favorite-button">&#9733;</button>
+                </div>
+            </div>
+            <div class="music-item">
+                <img class="music-image" src="{% static 'images/kelly_clarkson.png' %}" alt="Kelly Clarkson">
+                <div class="music-info">
+                    <p>Kelly Clarkson - Underneath the Tree</p>
+                </div>
+                <div class="music-actions">
+                    <button class="play-button">&#9658;</button>
+                    <button class="favorite-button">&#9733;</button>
+                </div>
             </div>
         </div>
-        <div class="music-item">
-            <img class="music-image" src="{% static 'images/ariana_grande.png' %}" alt="Ariana Grande">
-            <div class="music-info">
-                <p>Ariana Grande - Last Christmas</p>
-            </div>
-            <div class="music-actions">
-                <button class="play-button">&#9658;</button>
-                <button class="favorite-button">&#9733;</button>
-            </div>
-        </div>
-        <div class="music-item">
-            <img class="music-image" src="{% static 'images/kelly_clarkson.png' %}" alt="Kelly Clarkson">
-            <div class="music-info">
-                <p>Kelly Clarkson - Underneath the Tree</p>
-            </div>
-            <div class="music-actions">
-                <button class="play-button">&#9658;</button>
-                <button class="favorite-button">&#9733;</button>
-            </div>
-        </div>
     </div>
-</div>
 
 {% endblock %}

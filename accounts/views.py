@@ -1,4 +1,4 @@
-from django.shortcuts   import render, redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import authenticate
 
@@ -9,12 +9,14 @@ from django.contrib.auth.hashers import make_password
 
 from .models import User
 
+
 # Create your views here.
 def logout(request):
     if request.method == 'POST':
         auth_logout(request)
         print("Logged out successfully")
     return redirect('/')
+
 
 def login(request):
     if request.method == 'GET':
@@ -34,10 +36,11 @@ def login(request):
             return redirect('home:home')
 
         # 로그인 실패
-        else :
-            errMsg = {}
+        else:
+            errMsg = {"로그인을 실패했습니다."}
             print("login failed")
             return render(request, 'account/login.html', errMsg)
+
 
 # 회원가입
 def signup(request):
@@ -52,7 +55,7 @@ def signup(request):
             nickname=request.POST['nickname'],
             birth=request.POST['birth'],
             gender=request.POST['gender'],
-            email=request.POST['email']+"@"+request.POST['email-detail']
+            email=request.POST['email'] + "@" + request.POST['email-detail']
         )
         user.save()
 
@@ -62,10 +65,6 @@ def signup(request):
             auth_login(request, new_user)
             return redirect('home:home')  # 홈으로 이동
 
-    return render(request, 'account/signup.html')
-
-def signup_done(request):
-    pass
 
 def get_redirect_if_exists(request):
     redirect = None
@@ -74,8 +73,8 @@ def get_redirect_if_exists(request):
             redirect = str(request.GET.get('next'))
     return redirect
 
+
 def google_login(request):
     pass
 #     client_id = CLIENT_ID
 #     return redirect(f"{GOOGLE_REDIRECT}?client_id={client_id}&response_type=code&redirect_uri={GOOGLE_CALLBACK_URI}&scope={scope}")
-

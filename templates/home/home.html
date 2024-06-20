@@ -2,126 +2,143 @@
 {% load static %}
 
 {% block style %}
-<style>
-    .img-box {
-        display: flex;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 200px;
-        position: relative;
-        width: 350px;
-        height: 320px;
-        background: rgb(254, 254, 254);
-        border: 3px solid rgb(94, 130, 35);
-        border-radius: 40px;
-        box-sizing: border-box;
-        justify-content: center;
-        align-items: center;
-    }
-    .upload-box {
-        display: flex;
-        margin: 0 auto;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 575px;
-        position: absolute;
-        width: 100%;
-        max-width: 600px;
-        height: 50px;
-        align-items: center;
-        background: rgb(254, 254, 254);
-        border: 3px solid rgb(94, 130, 35);
-        border-radius: 40px;
-        box-sizing: border-box;
-        z-index: 1;
-    }
-    .upload-title {
-        flex-grow: 1;
-        font-family: "Noto Serif KR";
-        font-size: 20px;
-        color: #333;
-        margin-left: 20px;
-    }
-    .upload-button {
-        background: none;
-        display: flex;
-        align-items: center;
-    }
-    .upload-button button {
-        margin-left: auto;
-        width: auto;
-        margin-right: 20px;
-        padding: 0;
-        font-family: "Noto Serif KR";
-        font-size: 20px;
-        font-weight: 700;
-        color: rgb(94, 130, 35);
-        border : none;
-        background: none;
-        cursor: pointer;
-    }
-    .enter-button {
-        position: absolute;
-        top: 670px;
-        left: 50%;
-        transform: translateX(-50%);
-        text-align: center;
-        cursor : pointer
-    }
-    .enter-button a {
-        color: rgb(94, 130, 35);
-        font-family: "Noto Serif KR";
-        font-size: 22px;
-        font-weight: 700;
-        text-decoration: none;
-    }
-</style>
+    <style>
+        .img-box {
+            display: flex;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 200px;
+            position: relative;
+            width: 350px;
+            height: 320px;
+            background: rgb(254, 254, 254);
+            border: 3px solid rgb(94, 130, 35);
+            border-radius: 40px;
+            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-box {
+            display: flex;
+            margin: 0 auto;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 575px;
+            position: absolute;
+            width: 100%;
+            max-width: 600px;
+            height: 50px;
+            align-items: center;
+            background: rgb(254, 254, 254);
+            border: 3px solid rgb(94, 130, 35);
+            border-radius: 40px;
+            box-sizing: border-box;
+            z-index: 1;
+        }
+
+        .upload-title {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        .upload-title .upload-name {
+            font-family: "Noto Serif KR";
+            font-size: 20px;
+            color: #333;
+            border: none;
+        }
+
+        .upload-button {
+            background: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .upload-button label {
+            margin-left: auto;
+            width: auto;
+            margin-right: 20px;
+            padding: 0;
+            font-family: "Noto Serif KR";
+            font-size: 20px;
+            font-weight: 700;
+            color: rgb(94, 130, 35);
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .enter-button {
+            position: absolute;
+            top: 670px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            cursor: pointer
+        }
+
+        .enter-button a {
+            color: rgb(94, 130, 35);
+            font-family: "Noto Serif KR";
+            font-size: 22px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+    </style>
+
 {% endblock %}
 
 {% block content %}
+    <script>
+
+        // 이미지 파일명 & 미리보기
+        function imageView(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    // 이미지 가져오기
+                    $('.tempImage').attr('src', e.target.result)
+
+                    // 파일명 가져오기
+                    document.querySelector('.upload-name').value = input.files[0].name;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
 
     <!--이미지 업로드 박스-->
     <div class="img-box">
-    {% for image in images %}
-        <img src="{{ image.image.url }}">
-    {% endfor %}
-
+        <img class="tempImage" style="max-width: 280px;max-height: 280px;" src=""/>
     </div>
 
     <!--이미지 파일명 박스-->
     <div class="upload-box">
-    {% if request.user.is_authenticated %}
-    <div class="upload-title">
-    </div>
-        <form method="POST" action="{% url 'home:upload' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="upload-button">
-                <button id="btn-imageupload" type="submit">Upload</button>
-                <!--숨겨진 파일 입력 필드-->
-                <input type="file" id="input-imageupload" onchange="" style="display: none;">
+        {% if request.user.is_authenticated %}
+            <div class="upload-title">
+                <input class="upload-name" readonly>
             </div>
-        </form>
-    {% endif %}
+            <form id="uploadForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="upload-button">
+                    <label for="inputFile">Upload</label>
+                    <input id="inputFile" type="file" class="tempImage" accept="image/*" onchange="imageView(this)"
+                           style="display: none;">
+                </div>
+            </form>
+        {% endif %}
     </div>
-
-    <script>
-        // JavaScript를 사용하여 파일 입력 필드를 감추고 버튼 클릭 시 파일 선택 창을 열도록 설정
-        document.querySelector('.upload-button').addEventListener('click', function() {
-            document.getElementById('file-input').click();
-        });
-
-        $('#btn-imageupload').click(function (){
-            $('#input-imageupload').click();
-        });
-    </script>
 
     <!--엔터 버튼-->
     {% if request.user.is_authenticated %}
-    <div class="enter-button">
-        <a href="{% url 'home:result' %}">Enter</a>
-    </div>
+        <div class="enter-button">
+            <a href="{% url 'home:result' %}">Enter</a>
+        </div>
     {% endif %}
-    
-{% endblock %}
 
+{% endblock %}

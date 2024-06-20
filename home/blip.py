@@ -14,6 +14,7 @@ API_URL = "https://api-inference.huggingface.co/models/Salesforce/blip-image-cap
 # 인증 코드 넣기
 headers = {"Authorization": f"Bearer {API_KEY}"}
 
+
 # 인터넷 연결 필요
 def query(filename):
     with open(filename, "rb") as f:
@@ -21,6 +22,6 @@ def query(filename):
     response = requests.post(API_URL, headers=headers, data=data)
     return response.json()
 
+
 output = query("../media/images/christmas.png")
 print(output[0]['generated_text'])
-
