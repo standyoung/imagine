@@ -3,7 +3,7 @@
 ![image](static/images/imagine.png)
 
 ## Introduction
-> 개발 기간: 2024.04 ~ 
+> 개발 기간: 2024.04 ~ 2024.09
 
 ## Achivement
 > 2024년도 캡스톤 디자인 프로젝트
